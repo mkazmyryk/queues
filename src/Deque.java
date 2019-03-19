@@ -1,36 +1,52 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * @param <Item> - generic parameter for dequeue
+ * @author Kazmyryk.M
+ * @version 1.0
+ */
 public final class Deque<Item> implements Iterable<Item> {
+    /**
+     * Field with reference of first node.
+     */
     private Node first;
+
+    /**
+     * Field with reference of last node.
+     */
     private Node last;
+
+    /**
+     * Field with size of deque.
+     */
     private int size = 0;
 
-    private class Node {
-        private Item item;
-        private Node next;
-        private Node previous;
-
-        Node() {
-            this.item = null;
-            this.next = null;
-            this.previous = null;
-        }
-    }
-
+    /**
+     *
+     */
     public Deque() {
         this.first = null;
         this.last = null;
     }                           // construct an empty deque
 
+    /**
+     * @return size
+     */
     public boolean isEmpty() {
         return size == 0;
     }                 // is the deque empty?
 
+    /**
+     * @return size of deque
+     */
     public int size() {
         return size;
     }                        // return the number of items on the deque
 
+    /**
+     * @param item - item that will be added to deque
+     */
     public void addFirst(final Item item) {
         if (item == null) {
             throw new IllegalArgumentException();
@@ -54,6 +70,9 @@ public final class Deque<Item> implements Iterable<Item> {
 
     }          // add the item to the front
 
+    /**
+     * @param item - item that will be added to deque
+     */
     public void addLast(final Item item) {
         if (item == null) {
             throw new IllegalArgumentException();
@@ -76,6 +95,9 @@ public final class Deque<Item> implements Iterable<Item> {
         }
     }           // add the item to the end
 
+    /**
+     * @return item that will be removed
+     */
     public Item removeFirst() {
         if (size == 0) {
             throw new NoSuchElementException();
@@ -93,6 +115,9 @@ public final class Deque<Item> implements Iterable<Item> {
         return removedItem;
     }               // remove and return the item from the front
 
+    /**
+     * @return item that will be removed
+     */
     public Item removeLast() {
         if (size == 0) {
             throw new NoSuchElementException();
@@ -110,11 +135,51 @@ public final class Deque<Item> implements Iterable<Item> {
         return removedItem;
     }                 // remove and return the item from the end
 
+    /**
+     * @return iterator
+     */
     public Iterator<Item> iterator() {
         return new DequeIterator();
     }        // return an iterator over items in order from front to end
 
+    /**
+     * Inner class. Represents node.
+     *
+     * @author Kazmyryk.M
+     * @version 1.0
+     */
+    private class Node {
+        /**
+         * Field with item.
+         */
+        private Item item;
+        /**
+         * Field with reference of next node.
+         */
+        private Node next;
+        /**
+         * Field with reference of previous node.
+         */
+        private Node previous;
+
+        /**
+         * Default constructor.
+         * Init all fields with null.
+         */
+        Node() {
+            this.item = null;
+            this.next = null;
+            this.previous = null;
+        }
+    }
+
+    /**
+     * Simple class that represents deque iterator.
+     */
     private class DequeIterator implements Iterator<Item> {
+        /**
+         * Field with current reference.
+         */
         private Node current = first;
 
         @Override
